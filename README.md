@@ -6,14 +6,16 @@ Personal menu for FiveM with player information, clothing toggles, vehicle optio
 
 ## Installation
 
-1. Place the `R1_PersonalMenu` folder in `resources`.
+1. Place the `R1_PersonalMenu-main` folder in `resources`.
 
-2. Add in `server.cfg`:
+2. Rename the file from `R1_PersonalMenu-main` to `R1_PersonalMenu`.
+
+3. Add in `server.cfg`:
 
 ```cfg
 ensure R1_PersonalMenu
 ```
-3. Run the sql.sql file on your database for identification and licensing.
+4. Run the sql.sql file on your database for identification and licensing.
 
 ## Quick setup
 
