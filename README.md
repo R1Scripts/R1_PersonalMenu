@@ -13,6 +13,7 @@ Personal menu for FiveM with player information, clothing toggles, vehicle optio
 ```cfg
 ensure R1_PersonalMenu
 ```
+3. Run the sql.sql file on your database for identification and licensing.
 
 ## Quick setup
 
@@ -24,16 +25,17 @@ Config.OpenKey = 'G'
 Config.Command = 'personalmenu'
 ```
 
-## Use
-
-- Configured key: `G`
-- Command: `/personalmenu`
-
 ## Configurable systems
 
 ```lua
-Config.CarRadio.command = 'carradio'
-Config.ReloadSkin.system = 'illenium'
+Config.Commands = {
+    { command = 'carradio', label = 'Car Radio' },
+    { command = 'reloadskin', label = 'Reiniciar Ped' },
+    { command = 'hud', label = 'HUD' },
+    { command = 'report', label = 'Reporte' }
+}
+
+Config.ServerNationality = 'R SCRIPTS'
 ```
 
 Supported systems for reload skin:
