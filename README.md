@@ -1,5 +1,5 @@
-Preview: https://youtu.be/6T7Gre6mgH0
-Tebex Shop: https://r1-scripts.tebex.io/
+- Preview: https://youtu.be/6T7Gre6mgH0
+- Tebex Shop: https://r1-scripts.tebex.io/
 
 # R1 Personal Menu
 
