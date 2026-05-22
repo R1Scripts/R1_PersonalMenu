@@ -53,3 +53,5 @@ Supported systems for reload skin:
 ```lua
 Config.Notify = 'chat' -- 'chat', 'ox', 'r1', 'none'
 ```
+
+<img width="1090" height="665" alt="image" src="https://github.com/user-attachments/assets/d2eacd37-0c0a-4fca-8b49-7581d200d25d" />
