@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R1 Personal Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="hidden">
+        <div class="r1-shell menu-only">
+            <aside class="side-panel">
+                <div class="brand">
+                    <span>R1 SCRIPTS</span>
+                    <h1 id="menuTitle">R1 PERSONAL MENU</h1>
+                </div>
+
+                <div class="profile-card">
+                    <div class="avatar"><i class="fa-solid fa-user-ninja"></i></div>
+                    <div>
+                        <h2 id="profileName">Jugador</h2>
+                        <p id="profileJob">Cargando...</p>
+                    </div>
+                </div>
+
+                <div id="navList" class="nav-list"></div>
+            </aside>
+
+            <main id="contentPanel" class="content-panel hidden-panel">
+                <div class="content-head">
+                    <div>
+                        <span id="pageEyebrow">R1 PERSONAL</span>
+                        <h3 id="pageTitle">Comandos</h3>
+                        <p id="pageDescription">Accesos rápidos configurables.</p>
+                    </div>
+                    <button id="closeBtn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <section id="page-commands" class="page"></section>
+                <section id="page-info" class="page"></section>
+                <section id="page-clothes" class="page"></section>
+                <section id="page-vehicle" class="page"></section>
+                <section id="page-animations" class="page"></section>
+                <section id="page-documents" class="page"></section>
+            </main>
+        </div>
+    </div>
+
+    <div id="documentOverlay" class="doc-overlay hidden">
+        <div id="docCard" class="ine-card doc-id">
+            <div class="ine-header">
+                <div>
+                    <span id="docTypeLabel">INE DIGITAL</span>
+                    <h2 id="docTitle">IDENTIFICACIÓN OFICIAL</h2>
+                    <small id="docServer">911 MEXICO</small>
+                </div>
+                <button id="closeDocFinger" class="doc-fingerprint" title="Cerrar documento">
+                    <i class="fa-solid fa-fingerprint"></i>
+                </button>
+            </div>
+            <div class="ine-body">
+                <div class="doc-photo" id="docPhoto"><i class="fa-solid fa-user"></i></div>
+                <div class="doc-data">
+                    <div><b>Nombre</b><span id="docName">N/A</span></div>
+                    <div><b>Edad</b><span id="docAge">N/A</span></div>
+                    <div><b>Fecha nacimiento</b><span id="docBirthdate">N/A</span></div>
+                    <div><b>Estatura</b><span id="docHeight">N/A</span></div>
+                    <div><b>Sexo</b><span id="docSex">N/A</span></div>
+                    <div><b>Nacionalidad</b><span id="docNationality">N/A</span></div>
+                    <div><b id="docExtraTitle">Clave</b><span id="docExtraValue">N/A</span></div>
+                    <div><b>Estado</b><span id="docStatus">N/A</span></div>
+                    <div><b>Expedición</b><span id="docIssued">N/A</span></div>
+                </div>
+            </div>
+            <div id="docFooter" class="ine-footer">R1 PERSONAL MENU • DOCUMENTOS</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
