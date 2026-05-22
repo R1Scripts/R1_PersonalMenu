@@ -26,6 +26,7 @@ In `shared/config.lua`:
 Config.Framework = 'esx' -- 'esx', 'qb', 'standalone'
 Config.OpenKey = 'G'
 Config.Command = 'personalmenu'
+Config.Locale = 'en' -- 'es' = Español, 'en' = English
 ```
 
 ## Configurable systems
