@@ -294,6 +294,19 @@ local function BuildDocumentData(src, docType)
             if weaponRows and weaponRows[1] then
                 weaponSerial = weaponRows[1].weapon_serial
             end
+        else
+            -- Si la licencia fue comprada/entregada por ox_inventory o esx_license,
+            -- también la mostramos como vigente en la NUI.
+            local hasOxLicense = ScalarAwait('SELECT 1 FROM `user_licenses` WHERE `type` = ? AND `owner` = ? LIMIT 1', {
+                (Config.WeaponLicense and Config.WeaponLicense.oxLicenseName) or 'weapon',
+                info.identifier
+            })
+
+            if hasOxLicense then
+                extraValue = LocalizeLicenseType(extraValue)
+                status = _U('valid')
+                topStatus = _U('valid')
+            end
         end
     end
 
@@ -441,7 +454,45 @@ local function FindTargetWeapon(src, slot, name, serial)
     return nil
 end
 
+local function GetOxWeaponLicenseName()
+    return (Config.WeaponLicense and Config.WeaponLicense.oxLicenseName) or 'weapon'
+end
+
+local function IsWeaponLicenseValid(status)
+    local value = tostring(status or 'Vigente'):lower()
+    return value == 'vigente' or value == 'valid'
+end
+
+local function SyncOxWeaponLicense(identifier, status)
+    local licenseName = GetOxWeaponLicenseName()
+
+    if not identifier or not licenseName or licenseName == '' then
+        return
+    end
+
+    if IsWeaponLicenseValid(status) then
+        local exists = ScalarAwait('SELECT 1 FROM `user_licenses` WHERE `type` = ? AND `owner` = ? LIMIT 1', {
+            licenseName,
+            identifier
+        })
+
+        if not exists then
+            QueryAwait('INSERT INTO `user_licenses` (`type`, `owner`) VALUES (?, ?)', {
+                licenseName,
+                identifier
+            })
+        end
+    else
+        QueryAwait('DELETE FROM `user_licenses` WHERE `type` = ? AND `owner` = ?', {
+            licenseName,
+            identifier
+        })
+    end
+end
+
 local function EnsureWeaponLicense(identifier, officerId, licenseType, status)
+    status = status or 'Vigente'
+
     QueryAwait([[
         INSERT INTO r1_weapon_licenses
             (identifier, license_type, officer_identifier, officer_name, status)
@@ -458,8 +509,11 @@ local function EnsureWeaponLicense(identifier, officerId, licenseType, status)
         licenseType or (Config.WeaponLicense and Config.WeaponLicense.defaultType) or 'Portación civil registrada',
         GetIdentifier(officerId),
         GetPlayerName(officerId),
-        status or 'Vigente'
+        status
     })
+
+    -- Esto es lo que usa ox_inventory / esx_license para permitir comprar armas.
+    SyncOxWeaponLicense(identifier, status)
 
     return ScalarAwait('SELECT id FROM r1_weapon_licenses WHERE identifier = ? LIMIT 1', { identifier })
 end
@@ -792,6 +846,9 @@ RegisterNetEvent('R1_PersonalMenu:server:createWeaponLicense', function(targetId
         GetPlayerName(src),
         status
     })
+
+    -- Sincroniza con user_licenses para que ox_inventory detecte la licencia.
+    SyncOxWeaponLicense(targetIdentifier, status)
 
     TriggerClientEvent('R1_PersonalMenu:client:notify', src, 'success', _U('licenses'), _U('weapon_license_given'), 4500)
     TriggerClientEvent('R1_PersonalMenu:client:notify', targetId, 'info', _U('licenses'), _U('weapon_license_received'), 4500)
