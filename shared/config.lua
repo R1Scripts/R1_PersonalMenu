@@ -1,7 +1,7 @@
 Config = {}
 
 Config.Framework = 'esx' -- 'esx', 'qb', 'standalone'
-Config.Locale = 'en' -- 'es' = Español, 'en' = English
+Config.Locale = 'es' -- 'es' = Español, 'en' = English
 Config.Command = 'personalmenu'
 Config.OpenKey = 'G'
 Config.MenuTitle = 'R1 PERSONAL MENU'
@@ -229,6 +229,8 @@ Config.WeaponLicense = {
 
     requestDistance = 3.0,
     requestTimeout = 15000,
+
+    oxLicenseName = 'weapon',
 
     defaultType = 'Portación civil registrada',
     licenseTypes = {
